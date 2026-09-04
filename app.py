@@ -3,6 +3,19 @@ import pandas as pd
 
 st.set_page_config(page_title="Dispatch", page_icon="🚑", layout="wide")
 
+st.markdown("""
+<style>
+  #MainMenu, footer, header {visibility: hidden;}
+  .block-container {padding-top: 2.5rem; padding-bottom: 2rem; max-width: 1500px;}
+  h1 {letter-spacing: -0.03em; font-weight: 800;}
+  [data-testid="stMetricValue"] {font-variant-numeric: tabular-nums;}
+  [data-testid="stMetricLabel"] {
+      text-transform: uppercase; letter-spacing: .12em;
+      font-size: .7rem; opacity: .6;
+  }
+</style>
+""", unsafe_allow_html=True)
+
 # --- SEEDED DATA (synthetic; real hospitals, invented capacity) -------------
 HOSPITALS = pd.DataFrame([
     {"name": "Victoria Hospital",        "lat": 12.9634, "lon": 77.5747, "icu_free": 3, "specialties": "Trauma, Cardiac, General", "o_neg": 6, "trauma_level": 1, "er_load": "High"},
