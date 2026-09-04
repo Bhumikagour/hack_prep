@@ -15,6 +15,14 @@ HOSPITALS = pd.DataFrame([
     {"name": "Bowring & Lady Curzon",    "lat": 12.9827, "lon": 77.6041, "icu_free": 1, "specialties": "General",                 "o_neg": 1, "trauma_level": 3, "er_load": "High"},
 ])
 
+AMBULANCES = pd.DataFrame([
+    {"unit": "KA-01-A", "area": "Indiranagar",  "lat": 12.9719, "lon": 77.6412, "crew": "ALS", "status": "Available"},
+    {"unit": "KA-01-B", "area": "Jayanagar",    "lat": 12.9250, "lon": 77.5938, "crew": "BLS", "status": "Available"},
+    {"unit": "KA-01-C", "area": "Whitefield",   "lat": 12.9698, "lon": 77.7500, "crew": "ALS", "status": "On call"},
+    {"unit": "KA-01-D", "area": "Hebbal",       "lat": 13.0358, "lon": 77.5970, "crew": "ALS", "status": "Available"},
+    {"unit": "KA-01-E", "area": "Koramangala",  "lat": 12.9352, "lon": 77.6245, "crew": "BLS", "status": "Available"},
+])
+
 from math import radians, sin, cos, asin, sqrt
 
 SCENES = {
@@ -132,4 +140,4 @@ with right:
     pts["size"] = [320 if h.name == best.Hospital else 180
                    for h in HOSPITALS.itertuples()]
     pts.loc[len(pts)] = [scene[0], scene[1], "#C0392A", 400]
-    st.map(pts, color="color", size="size", zoom=11)
+    st.map(pts, color="color", size="size", zoom=11)9000-1Q2Q1  `12W32Q123`
