@@ -117,20 +117,33 @@ for h in HOSPITALS.itertuples():
 ranked = pd.DataFrame(rows).sort_values("Score", ascending=False).reset_index(drop=True)
 best = ranked.iloc[0]
 
+nearest = ranked.sort_values("ETA").iloc[0]
+
 with right:
     st.subheader("Recommended receiving hospital")
+
     if best.Blocked:
         st.error(f"No hospital clears every requirement. Closest option "
                  f"**{best.Hospital}** is blocked: {best.Blocked}.")
     else:
         st.success(f"**{best.Hospital}** — {best.Assessment}")
+        if nearest.Hospital != best.Hospital and nearest.Blocked:
+            st.warning(
+                f"Nearest hospital **{nearest.Hospital}** ({nearest.ETA} min) "
+                f"cannot accept this patient — {nearest.Blocked}. "
+                f"Routing {best.ETA - nearest.ETA} minutes further to a hospital that can."
+            )
 
     st.dataframe(
-        ranked, use_container_width=True, hide_index=True,
+        ranked[["Hospital", "Score", "ETA", "Blocked", "Assessment"]],
+        use_container_width=True, hide_index=True,
         column_config={
-            "Score": st.column_config.ProgressColumn("Suitability", min_value=0,
-                                                     max_value=120, format="%d"),
-            "ETA": st.column_config.NumberColumn("ETA", format="%d min"),
+            "Score":      st.column_config.ProgressColumn("Suitability", min_value=0,
+                                                          max_value=120, format="%d",
+                                                          width="small"),
+            "ETA":        st.column_config.NumberColumn("ETA", format="%d min", width="small"),
+            "Blocked":    st.column_config.TextColumn("Cannot accept", width="medium"),
+            "Assessment": st.column_config.TextColumn("Assessment", width="large"),
         },
     )
 
