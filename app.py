@@ -140,4 +140,4 @@ with right:
     pts["size"] = [320 if h.name == best.Hospital else 180
                    for h in HOSPITALS.itertuples()]
     pts.loc[len(pts)] = [scene[0], scene[1], "#C0392A", 400]
-    st.map(pts, color="color", size="size", zoom=11)9000-1Q2Q1  `12W32Q123`
+    st.map(pts, color="color", size="size", zoom=11)
